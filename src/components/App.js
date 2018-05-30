@@ -15,11 +15,31 @@ export default class App extends Component {
     }
 
     handleHeader({ target }) {
-        this.setState({ name: target.value });
+        this.setState({ headerText: target.value });
     }
 
     handleFooter({ target }) {
-        this.setState({ name: target.value });
+        this.setState({ footerText: target.value });
+    }
+
+    handleImageSrc({ target }) {
+        this.setState({ image: target.value });
+    }
+
+    handleUpload({ target }) {
+        const reader = new FileReader();
+    
+        reader.readAsDataURL(target.files[0]);
+    
+        reader.onload = () => {
+          this.setState({ image: reader.result });
+        };
+    }
+
+    handleExport() {
+        dom2image.toBlob(this.imageExport).then(blob => {
+          fileSaver.saveAs(blob, 'meme-image.png');
+        });
     }
 
     render() {
@@ -33,6 +53,7 @@ export default class App extends Component {
                         <label>
                             Header Text:
                             <input 
+                                type="text"
                                 value={headerText}
                                 onChange={event => this.handleHeader(event)}
                             />
@@ -65,11 +86,18 @@ export default class App extends Component {
                             />
                         </label>
                     </div>
+
+                    <div>
+                        <button onClick={() => this.handleExport()}>
+                            Export
+                        </button>
+                    </div>
+
                     <div className="image-container"
                         ref={node => this.imageExport = node}
                     >
                         <h2>{headerText}</h2>
-                        <img src={image}/>
+                        <img src={image} width="300px"/>
                         <h2>{footerText}</h2>
                     </div>
                 </section>
