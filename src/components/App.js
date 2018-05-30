@@ -10,8 +10,16 @@ export default class App extends Component {
         this.state = {
             headerText: 'This is',
             footerText: 'a Meme',
-            image: null
+            image: 'https://pbs.twimg.com/media/CoTDCVNW8AAAmfA.png'
         }
+    }
+
+    handleHeader({ target }) {
+        this.setState({ name: target.value });
+    }
+
+    handleFooter({ target }) {
+        this.setState({ name: target.value });
     }
 
     render() {
@@ -26,6 +34,7 @@ export default class App extends Component {
                             Header Text:
                             <input 
                                 value={headerText}
+                                onChange={event => this.handleHeader(event)}
                             />
                         </label>
                     </div>
@@ -34,6 +43,7 @@ export default class App extends Component {
                             Footer Text:
                             <input 
                                 value={footerText}
+                                onChange={event => this.handleFooter(event)}
                             />
                         </label>
                     </div>
@@ -43,7 +53,7 @@ export default class App extends Component {
                     <div>
                         <label>
                             Image Src:
-                            <input/>
+                            <input onChange={event => this.handleImageSrc(event)}/>
                         </label>
                     </div>
                     <div>
@@ -51,11 +61,16 @@ export default class App extends Component {
                             Image:
                             <input
                                 type="file"
+                                onChange={event => this.handleUpload(event)}
                             />
                         </label>
                     </div>
-                    <div className="image-container">
+                    <div className="image-container"
+                        ref={node => this.imageExport = node}
+                    >
+                        <h2>{headerText}</h2>
                         <img src={image}/>
+                        <h2>{footerText}</h2>
                     </div>
                 </section>
             </main>
