@@ -10,6 +10,7 @@ export default class App extends Component {
         this.state = {
             headerText: 'This is',
             footerText: 'a Meme',
+            color: '#000000',
             image: 'https://pbs.twimg.com/media/CoTDCVNW8AAAmfA.png'
         }
     }
@@ -20,6 +21,10 @@ export default class App extends Component {
 
     handleFooter({ target }) {
         this.setState({ footerText: target.value });
+    }
+
+    handleColor({ target }) {
+        this.setState({ color: target.value });
     }
 
     handleImageSrc({ target }) {
@@ -43,11 +48,11 @@ export default class App extends Component {
     }
 
     render() {
-        const { headerText, footerText, image } = this.state;
+        const { headerText, footerText, color, image } = this.state;
 
         return (
             <main>
-                <h2>Cool Stuff</h2>
+                <h2 id="main-header">Meme Generator</h2>
                 <fieldset>
                     <div>
                         <label>
@@ -56,6 +61,11 @@ export default class App extends Component {
                                 type="text"
                                 value={headerText}
                                 onChange={event => this.handleHeader(event)}
+                            />
+                            <input
+                                type="color"
+                                value={color}
+                                onChange={event => this.handleColor(event)}
                             />
                         </label>
                     </div>
@@ -70,14 +80,14 @@ export default class App extends Component {
                     </div>
                 </fieldset>
 
-                <section>
-                    <div>
+                <section id="image-section">
+                    <div id="image-src">
                         <label>
                             Image Src:
                             <input onChange={event => this.handleImageSrc(event)}/>
                         </label>
                     </div>
-                    <div>
+                    <div id="image-file">
                         <label>
                             Image:
                             <input
@@ -87,7 +97,7 @@ export default class App extends Component {
                         </label>
                     </div>
 
-                    <div>
+                    <div id="export-button">
                         <button onClick={() => this.handleExport()}>
                             Export
                         </button>
@@ -96,9 +106,9 @@ export default class App extends Component {
                     <div className="image-container"
                         ref={node => this.imageExport = node}
                     >
-                        <h2>{headerText}</h2>
-                        <img src={image} width="300px"/>
-                        <h2>{footerText}</h2>
+                        <h2 id="meme-text-top" style={{ color }}>{headerText}</h2>
+                        <img id="meme-image" src={image}/>
+                        <h2 id="meme-text-bottom" style={{ color }}>{footerText}</h2>
                     </div>
                 </section>
             </main>

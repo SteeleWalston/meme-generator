@@ -1,0 +1,22 @@
+.image-container {
+    position: relative;
+    max-width: 300px;
+  }
+
+#meme-image {
+    max-width: 300px;
+}
+  
+.image-container #meme-text-top {
+    position: absolute;
+    top: 0;
+    text-align: center;
+    width: 100%
+}
+
+.image-container #meme-text-bottom {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%
+}
