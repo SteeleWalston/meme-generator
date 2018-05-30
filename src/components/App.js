@@ -80,7 +80,7 @@ export default class App extends Component {
                     </div>
                 </fieldset>
 
-                <section id="image-section">
+                <section>
                     <div id="image-src">
                         <label>
                             Image Src:
@@ -102,7 +102,8 @@ export default class App extends Component {
                             Export
                         </button>
                     </div>
-
+                </section>
+                <section id="image-section">
                     <div className="image-container"
                         ref={node => this.imageExport = node}
                     >
